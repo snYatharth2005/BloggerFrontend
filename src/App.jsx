@@ -13,7 +13,6 @@ import ProfileForm from './components/Home/ProfileForm';
 
 function App() {
 
-  // Load JWT token on app start and attach to axios
   const token = localStorage.getItem("token");
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -27,7 +26,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/posts" element={<Posts />} />
         
-        {/* Protected: Only logged in users can create a post */}
         <Route 
           path="/post" 
           element={

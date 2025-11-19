@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getPosts } from "../../api/axiosClient";
 import { Link } from "react-router-dom";
 
-// ⭐ Format createdAt nicely
 const formatDateTime = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleString("en-IN", {
@@ -55,25 +54,20 @@ function Posts() {
           >
             <div className="flex flex-col h-full">
 
-              {/* Post Title */}
               <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                 {post.title}
               </h3>
 
-              {/* Content Preview */}
               <p className="text-gray-600 text-sm sm:text-base line-clamp-2 mt-1">
                 {post.content}
               </p>
 
-              {/* Footer: Author (left) and Date (right) */}
               <div className="mt-3 flex flex-col sm:flex-row justify-between sm:items-center text-xs sm:text-sm text-gray-500">
                 
-                {/* Left — Author */}
                 <span className="mb-1 sm:mb-0">
                   Posted by <strong>{post.user.username}</strong>
                 </span>
 
-                {/* Right — Date */}
                 <span className="text-right">{formatDateTime(post.createdAt)}</span>
               </div>
             </div>

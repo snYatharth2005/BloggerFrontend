@@ -12,7 +12,6 @@ const Register = () => {
 
   const [message, setMessage] = useState("");
 
-  // ✅ Correct handleChange
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -25,7 +24,6 @@ const Register = () => {
       return;
     }
 
-    // Backend expects username
     const registerPayload = {
       username: form.username,
       email: form.email,
@@ -36,7 +34,6 @@ const Register = () => {
       await axiosClient.post("/auth/register", registerPayload);
       setMessage("✅ Registration successful! You can now log in.");
 
-      // optional: clear password fields
       setForm({
         username: "",
         email: "",

@@ -1,15 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import contact, { logo } from "../assets/assets";
 
 const Navbar = () => {
   const username = localStorage.getItem("username");
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
-    window.location.href = "/login"; // or navigate("/login")
+    window.location.href = "/login";
   };
 
   return (
@@ -47,8 +49,8 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="flex  items-center space-x-4 bg-[#F0EFEF] border border-gray-300 rounded-md px-6 py-3 shadow-sm">
-          <select className="cursor-pointer border  border-gray-300 rounded-md px-2 py-1 text-sm text-gray-700 bg-white focus:outline-none">
+        <div className="flex items-center space-x-4 bg-[#F0EFEF] border border-gray-300 rounded-md px-6 py-3 shadow-sm">
+          <select className="cursor-pointer border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-700 bg-white focus:outline-none">
             <option>All</option>
             <option>My Post</option>
             <option>By Following</option>
@@ -60,13 +62,44 @@ const Navbar = () => {
             <img src={contact} alt="contact" className="w-6 h-6" />
           </button>
 
-          {username ? (
+          {!username ? (
+            currentPath === "/login" ? (
+              <NavLink
+                to="/register"
+                className="relative group cursor-pointer overflow-hidden px-6 py-2 font-semibold text-white bg-black rounded-md transition-all duration-300 hover:scale-95"
+              >
+                <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+                  Register
+                </span>
+                <span className="absolute inset-0 bg-white translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0"></span>
+              </NavLink>
+            ) : currentPath === "/register" ? (
+              <NavLink
+                to="/login"
+                className="relative group cursor-pointer overflow-hidden px-6 py-2 font-semibold text-white bg-black rounded-md transition-all duration-300 hover:scale-95"
+              >
+                <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+                  Login
+                </span>
+                <span className="absolute inset-0 bg-white translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0"></span>
+              </NavLink>
+            ) : (
+              <NavLink
+                to="/login"
+                className="relative group cursor-pointer overflow-hidden px-6 py-2 font-semibold text-white bg-black rounded-md transition-all duration-300 hover:scale-95"
+              >
+                <span className="relative z-10 group-hover:text-black transition-colors duration-300">
+                  Login
+                </span>
+                <span className="absolute inset-0 bg-white translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0"></span>
+              </NavLink>
+            )
+          ) : (
             <div className="relative group inline-block">
-              {/* MAIN BUTTON */}
               <span
                 className="relative inline-block cursor-pointer overflow-hidden
-    px-6 py-2 font-semibold text-white bg-black rounded-md
-    transition-all duration-300 hover:scale-95"
+                px-6 py-2 font-semibold text-white bg-black rounded-md
+                transition-all duration-300 hover:scale-95"
               >
                 <span className="relative z-10 group-hover:text-black transition-colors duration-300">
                   Hi, {username}
@@ -74,28 +107,28 @@ const Navbar = () => {
 
                 <span
                   className="absolute inset-0 bg-white translate-y-full
-      transition-transform duration-300 ease-in-out
-      group-hover:translate-y-0"
+                  transition-transform duration-300 ease-in-out
+                  group-hover:translate-y-0"
                 ></span>
               </span>
 
-              {/* DROPDOWN */}
               <div
                 className="
-      absolute left-0 right-0 top-full -mt-[-5px]
-      opacity-0 invisible pointer-events-none -translate-y-2
-      group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto
-      group-hover:translate-y-0
-      transition-all duration-300 ease-out
-    "
+                  absolute left-0 right-0 top-full -mt-[1px]
+                  opacity-0 invisible pointer-events-none -translate-y-2
+                  group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto
+                  group-hover:translate-y-0
+                  transition-all duration-300 ease-out
+                "
               >
                 <NavLink
                   to="/profile"
                   className="w-full text-left px-11 py-2 bg-black text-white rounded-md
-      hover:bg-gray-800 transition cursor-pointer"
+                  hover:bg-gray-800 transition cursor-pointer"
                 >
                   Profile
                 </NavLink>
+
                 <button
                   onClick={handleLogout}
                   className="cursor-pointer w-full text-left mt-3 px-6 py-2 bg-white text-black rounded-md transition hover:scale-95"
@@ -104,16 +137,6 @@ const Navbar = () => {
                 </button>
               </div>
             </div>
-          ) : (
-            <NavLink
-              to="/login"
-              className="relative group cursor-pointer overflow-hidden px-6 py-2 font-semibold text-white bg-black rounded-md transition-all duration-300 hover:scale-95"
-            >
-              <span className="relative z-10 group-hover:text-black transition-colors duration-300">
-                Login
-              </span>
-              <span className="absolute inset-0 bg-white translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0"></span>
-            </NavLink>
           )}
         </div>
       </div>

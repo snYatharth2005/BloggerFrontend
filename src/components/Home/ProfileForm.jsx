@@ -61,12 +61,8 @@ const ProfileForm = () => {
         Complete Your Profile
       </h2>
 
-      {/* ========================
-          FORM 
-      ========================== */}
       <form onSubmit={handleSubmit} className="space-y-4">
 
-        {/* Full Name */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Full Name
@@ -82,7 +78,6 @@ const ProfileForm = () => {
           />
         </div>
 
-        {/* Age */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Age
@@ -98,7 +93,6 @@ const ProfileForm = () => {
           />
         </div>
 
-        {/* About */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             About
@@ -114,7 +108,6 @@ const ProfileForm = () => {
           ></textarea>
         </div>
 
-        {/* Social Links */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Twitter/X Link
@@ -175,7 +168,6 @@ const ProfileForm = () => {
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
@@ -186,9 +178,6 @@ const ProfileForm = () => {
         </button>
       </form>
 
-      {/* ========================
-          IMAGE UPLOAD SECTION
-      ========================== */}
       <div className="mt-6 space-y-2">
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Upload Profile Photo

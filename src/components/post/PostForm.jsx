@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosClient from "../../api/axiosClient"; // axios with baseURL + token
+import axiosClient from "../../api/axiosClient";
 
 const PostForm = () => {
 
@@ -28,7 +28,6 @@ const PostForm = () => {
 
       setMessage("✅ Post created successfully!");
       
-      // Reset the form
       setForm({ title: "", content: "" });
 
     } catch (err) {
@@ -46,7 +45,6 @@ const PostForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-4">
 
-        {/* Title */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Title
@@ -62,7 +60,6 @@ const PostForm = () => {
           />
         </div>
 
-        {/* Content */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Content
@@ -78,7 +75,6 @@ const PostForm = () => {
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
@@ -88,7 +84,6 @@ const PostForm = () => {
         </button>
       </form>
 
-      {/* Success/Error Message */}
       {message && (
         <p className="mt-3 text-sm text-center text-gray-700">{message}</p>
       )}

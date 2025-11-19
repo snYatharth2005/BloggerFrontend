@@ -11,7 +11,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Handle input change correctly
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -40,7 +39,6 @@ const Login = () => {
 
       setMessage(`✅ Login successful! ${localStorage.getItem("username")}`);
       
-      // redirect after login
       setTimeout(() => navigate("/"), 800);
 
     } catch (err) {

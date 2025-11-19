@@ -37,10 +37,9 @@ const PostPage = () => {
 
   return (
     <div className="max-w-3xl mx-auto mt-30 p-6 bg-[#F0EFEF] border border-gray-300 rounded-md shadow-sm font-poppins">
-      {/* Title */}
+      
       <h1 className="text-2xl font-bold text-gray-900 mb-2">{post.title}</h1>
 
-      {/* Metadata */}
       <div className="text-sm text-gray-500 mb-4">
         <span>
           Posted by <strong>{post.user.username}</strong>
@@ -49,10 +48,8 @@ const PostPage = () => {
         <span>Created: {formatDateTime(post.createdAt)}</span>
       </div>
 
-      {/* Content */}
       <p className="text-gray-700 leading-relaxed mb-6">{post.content}</p>
 
-      {/* Back Button */}
       <Link
         to="/"
         className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition"

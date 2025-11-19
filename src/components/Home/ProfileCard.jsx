@@ -7,7 +7,6 @@ const ProfileCard = ({ profile }) => {
   return (
     <div className="fixed top-30 left-30 w-72 bg-[#F0EFEF] border border-gray-300 rounded-md shadow-sm p-6 font-poppins transition transform hover:shadow-md hover:scale-[1.01]">
 
-      {/* Profile Picture */}
       <div className="flex flex-col items-center text-center">
         <img
           src={profile.profileImageUrl || "/default-profile.png"}
@@ -24,7 +23,6 @@ const ProfileCard = ({ profile }) => {
         </p>
       </div>
 
-      {/* Social Links */}
       <div className="flex justify-center space-x-4 mt-4">
 
         {profile.twitter && (
@@ -52,7 +50,6 @@ const ProfileCard = ({ profile }) => {
         )}
       </div>
 
-      {/* Stats */}
       <div className="mt-5 grid grid-cols-2 gap-2 text-center text-sm">
         <div className="bg-white border border-gray-300 rounded-md p-2">
           <span className="block font-bold text-gray-900">{profile.postsCount || 0}</span>
@@ -64,7 +61,6 @@ const ProfileCard = ({ profile }) => {
         </div>
       </div>
 
-      {/* Follow Button */}
       <div className="mt-5 flex justify-center">
         <button className="px-5 py-2 bg-black text-white rounded-md font-medium hover:bg-gray-800 transition">
           Follow

@@ -1,13 +1,12 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://bloggerbackend-production.up.railway.app", // backend base URL
+  baseURL: "http://localhost:8080", // backend base URL
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// 🔥 Automatically attach token before each request
 axiosClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -21,15 +20,13 @@ axiosClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// 🔥 Centralized error response handler
 axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Handle 401 token expiry → Auto logout
     if (error.response && error.response.status === 401) {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
-      window.location.href = "/login"; // redirect to login
+      window.location.href = "/login"; 
     }
 
     return Promise.reject(error);
@@ -47,7 +44,6 @@ export const getPosts = async () => {
   }
 };
 
-// ✅ Get a single post by ID
 export const getPostById = async (id) => {
   try {
     const response = await axiosClient.get(`/post/${id}`);
