@@ -36,7 +36,7 @@ const ProfileForm = () => {
     }
   };
 
-  const handleImageUpload = async () => {
+  const handleImageUpload = async (e) => {
     if (!imageFile) {
       setMessage("❌ Please select an image first.");
       return;
@@ -46,8 +46,9 @@ const ProfileForm = () => {
     formData.append("file", imageFile);
 
     try {
-      await uploadImage(formData);
+      const url = await uploadImage(formData);
       setMessage("✅ Profile image uploaded!");
+      console.log("Uploaded image URL:", url);
     } catch (err) {
       console.error(err);
       setMessage("❌ Image upload failed.");

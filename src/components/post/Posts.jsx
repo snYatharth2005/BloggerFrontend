@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getPosts } from "../../api/axiosClient";
+import axiosClient, { getPosts, toggleLike } from "../../api/axiosClient";
 import { Link } from "react-router-dom";
+import { user } from "../../assets/assets";
+import PostActionBar from "./PostActionBar";
 
 const formatDateTime = (dateString) => {
   const date = new Date(dateString);
@@ -19,59 +21,73 @@ function Posts() {
 
   useEffect(() => {
     getPosts()
-      .then((data) => {
-        setPosts(data || []);
-      })
-      .catch((err) => {
-        console.error("Error fetching posts:", err);
-      })
+      .then((data) => setPosts(data || []))
+      .catch((err) => console.error("Error fetching posts:", err))
       .finally(() => setLoading(false));
   }, []);
 
   if (loading)
-    return <h2 className="text-center text-gray-500 mt-8">Loading...</h2>;
+    return <h2 className="text-center text-gray-500 mt-20">Loading...</h2>;
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 mt-5 max-w-4xl mx-auto space-y-6 font-poppins">
-
+    <div className="px-4 sm:px-6 lg:px-8 my-5 max-w-3xl mx-auto space-y-8 font-poppins">
       {posts.length === 0 ? (
         <p className="text-gray-500 text-center">No posts available</p>
       ) : (
         posts.map((post) => (
-          <Link
-            to={`/post/${post.id}`}
+          <div
             key={post.id}
-            className="
-              block 
-              p-4 sm:p-5 
-              bg-[#F0EFEF] 
-              border border-gray-300 
-              rounded-md 
-              hover:shadow-md 
-              transition 
-              w-full
-            "
+            className="block w-full bg-[#F0EFEF] border border-gray-300 rounded-xl p-6 hover:shadow-lg transition"
           >
-            <div className="flex flex-col h-full">
+            <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-200">
+              <div className="flex items-center space-x-3">
+                <img
+                  src={post.user.profileImageUrl || user}
+                  alt={post.user.username}
+                  className="w-9 h-9 p-1 rounded-full border border-gray-300 object-cover"
+                />
 
-              <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                {post.title}
-              </h3>
+                <div className="flex flex-col leading-tight">
+                  <span className="text-[15px] font-semibold text-gray-900">
+                    {post.user.username}
+                  </span>
+                  <span className="text-xs text-gray-500">
+                    @{post.user.username.toLowerCase()}
+                  </span>
+                </div>
+              </div>
 
-              <p className="text-gray-600 text-sm sm:text-base line-clamp-2 mt-1">
-                {post.content}
-              </p>
+              <span className="text-xs text-gray-500 whitespace-nowrap">
+                {formatDateTime(post.createdAt)}
+              </span>
+            </div>
 
-              <div className="mt-3 flex flex-col sm:flex-row justify-between sm:items-center text-xs sm:text-sm text-gray-500">
-                
-                <span className="mb-1 sm:mb-0">
-                  Posted by <strong>{post.user.username}</strong>
-                </span>
+            <Link to={`/post/${post.id}?username=${post.user.username}`} key={post.id}>
+              <div className="text-lg font-bold text-gray-900 mb-2">
+                “{post.title}”
+              </div>
 
-                <span className="text-right">{formatDateTime(post.createdAt)}</span>
+              <div className="text-gray-700 text-sm leading-relaxed whitespace-pre-line mb-4">
+                {post.content
+                  .split("\n")
+                  .slice(0, 4)
+                  .map((line, index) => (
+                    <div key={index}>- {line.trim()}</div>
+                  ))}
+                <span className="ml-90">...read more</span>
+              </div>
+            </Link>
+
+            <div className="w-full bg-white rounded-md border border-gray-300 mt-4 overflow-hidden">
+              <div className="h-48 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+                No Image Available
               </div>
             </div>
-          </Link>
+
+            <div className="mt-4 flex justify-start gap-6 text-gray-500 text-xs">
+              <PostActionBar post={post} setPosts={setPosts} />
+            </div>
+          </div>
         ))
       )}
     </div>

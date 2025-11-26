@@ -1,15 +1,15 @@
 import React from "react";
-import { github, linkedin, twitter, leetcode } from "../../assets/assets";
+import { github, linkedin, twitter, leetcode, logo, user } from "../../assets/assets";
 
 const ProfileCard = ({ profile }) => {
   if (!profile) return null;
 
   return (
-    <div className="fixed top-30 left-30 w-72 bg-[#F0EFEF] border border-gray-300 rounded-md shadow-sm p-6 font-poppins transition transform hover:shadow-md hover:scale-[1.01]">
+    <div className="w-72 bg-[#F0EFEF] border border-gray-300 rounded-md shadow-sm p-6 font-poppins transition transform hover:shadow-md hover:scale-[1.01]">
 
       <div className="flex flex-col items-center text-center">
         <img
-          src={profile.profileImageUrl || "/default-profile.png"}
+          src={profile.profileImageUrl || user}
           alt="Author"
           className="w-24 h-24 rounded-full border-4 border-white shadow mb-3 object-cover"
         />

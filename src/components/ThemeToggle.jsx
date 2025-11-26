@@ -14,7 +14,7 @@ const ThemeToggle = () => {
     <button
       aria-label="Toggle theme"
       onClick={toggleTheme}
-      className="ml-4 rounded-full p-2 shadow transition-colors bg-gray-200 cursor-pointer"
+      className="hidden md:block ml-4 rounded-full p-2 shadow transition-colors bg-gray-200 cursor-pointer"
     >
       {theme === "dark" ? (
         <span role="img" aria-label="sun">🌞</span>

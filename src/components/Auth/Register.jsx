@@ -58,7 +58,7 @@ const Register = () => {
           <input
             type="text"
             name="username"
-            placeholder="Full Name"
+            placeholder="Username"
             value={form.username}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#6552D0]"

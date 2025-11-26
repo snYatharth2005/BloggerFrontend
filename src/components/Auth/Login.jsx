@@ -35,11 +35,11 @@ const Login = () => {
 
       // decode username from JWT
       const decoded = jwtDecode(token);
-      localStorage.setItem("username", decoded.sub);  // or decoded.username based on your backend
+      localStorage.setItem("username", decoded.sub);
 
       setMessage(`✅ Login successful! ${localStorage.getItem("username")}`);
       
-      setTimeout(() => navigate("/"), 800);
+      setTimeout(() => navigate("/home"), 800);
 
     } catch (err) {
       const msg =
