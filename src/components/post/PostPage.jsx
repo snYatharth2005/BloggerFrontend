@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
 import { getPostById, likedUsers } from "../../api/axiosClient";
-import { user } from "../../assets/assets";
+import { userIcon } from "../../assets/assets";
 import PostActionBar from "./PostActionBar";
 
 const formatDateTime = (dateString) => {
@@ -144,7 +144,7 @@ const PostPage = () => {
                   >
                     <div className="flex items-center gap-4 p-3">
                       <img
-                        src={user.profileImageUrl || user}
+                        src={user.profileImageUrl  || userIcon}
                         alt={user.username}
                         className="w-8 h-10 ml-5 rounded-full border border-gray-300 object-cover"
                       />

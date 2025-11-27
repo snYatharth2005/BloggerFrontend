@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { updateProfile, uploadImage } from "../../api/axiosClient";
 
 const ProfileForm = () => {

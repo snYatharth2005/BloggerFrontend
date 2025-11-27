@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import contact, { logo } from "../assets/assets";
@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-transparent px-8 py-4">
       <div className="flex justify-between items-center">
-        {/* LEFT SECTION */}
+       
         <div className="flex items-center space-x-8 bg-[#F0EFEF] border border-gray-300 rounded-md px-6 py-3 shadow-sm">
           <NavLink to="/home" className="flex items-center space-x-2">
             <img src={logo} alt="logo" className="h-10 w-10" />
@@ -51,7 +51,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* RIGHT SECTION */}
+       
         <div className="flex items-center space-x-4 bg-[#F0EFEF] border border-gray-300 rounded-md px-6 py-3 shadow-sm">
           <select className="hidden sm:block cursor-pointer border border-gray-300 rounded-md px-2 py-1 text-sm text-gray-700 bg-white focus:outline-none">
             <option>All</option>
@@ -65,7 +65,6 @@ const Navbar = () => {
             <img src={contact} alt="contact" className="w-6 h-6" />
           </button>
 
-          {/* AUTH BUTTONS */}
           {!username ? (
             currentPath === "/login" ? (
               <NavLink to="/register" className="relative group cursor-pointer overflow-hidden px-6 py-2 font-semibold text-white bg-black rounded-md transition-all duration-300 hover:scale-95">

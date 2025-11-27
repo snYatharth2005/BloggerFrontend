@@ -7,7 +7,7 @@ import PostForm from "./components/post/PostForm";
 import PostPage from "./components/post/PostPage";
 import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
-import ProtectedRoute from "./components/Auth/ProtectedRoute"; // NEW
+import ProtectedRoute from "./components/Auth/ProtectedRoute"; 
 import axios from "axios";
 import ProfileForm from "./components/Home/ProfileForm";
 import LandingPage from "./components/LandingPage";

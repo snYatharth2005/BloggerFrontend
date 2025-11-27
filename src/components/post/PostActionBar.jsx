@@ -1,4 +1,3 @@
-import React from "react";
 import { toggleLike } from "../../api/axiosClient";
 
 function PostActionBar({ post, setPost, setPosts }) {

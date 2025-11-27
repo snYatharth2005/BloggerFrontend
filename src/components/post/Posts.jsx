@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axiosClient, { getPosts, toggleLike } from "../../api/axiosClient";
+import { getPosts } from "../../api/axiosClient";
 import { Link } from "react-router-dom";
-import { user } from "../../assets/assets";
+import { userIcon } from "../../assets/assets";
 import PostActionBar from "./PostActionBar";
 
 const formatDateTime = (dateString) => {
@@ -42,7 +42,7 @@ function Posts() {
             <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-200">
               <div className="flex items-center space-x-3">
                 <img
-                  src={post.user.profileImageUrl || user}
+                  src={post.user.profileImageUrl || userIcon}
                   alt={post.user.username}
                   className="w-9 h-9 p-1 rounded-full border border-gray-300 object-cover"
                 />

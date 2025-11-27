@@ -1,5 +1,5 @@
 import React from "react";
-import { github, linkedin, twitter, leetcode, logo, user } from "../../assets/assets";
+import { github, linkedin, twitter, leetcode, userIcon } from "../../assets/assets";
 
 const ProfileCard = ({ profile }) => {
   if (!profile) return null;
@@ -9,7 +9,7 @@ const ProfileCard = ({ profile }) => {
 
       <div className="flex flex-col items-center text-center">
         <img
-          src={profile.profileImageUrl || user}
+          src={profile.profileImageUrl || userIcon}
           alt="Author"
           className="w-24 h-24 rounded-full border-4 border-white shadow mb-3 object-cover"
         />

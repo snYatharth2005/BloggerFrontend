@@ -1,8 +1,5 @@
-import React, {useState, useEffect} from 'react'
 import HomeCenter from './HomeCenter';
-import ProfileCard from './ProfileCard';
 import HomeRight from './HomeRight';
-import axiosClient from "../../api/axiosClient";
 import HomeLeft from './HomeLeft';
 
 
