@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "backendbyteblog.railway.internal", // backend base URL
+  baseURL: "backendbyteblog-production.up.railway.app", // backend base URL
   headers: {
     "Content-Type": "application/json",
   },
