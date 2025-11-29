@@ -1,6 +1,6 @@
 import { toggleLike } from "../../api/axiosClient";
 
-function PostActionBar({ post, setPost, setPosts }) {
+function PostActionBar({ post, setPost, setPosts, onCommentClick }) {
   const handleLike = () => {
     const username = localStorage.getItem("username");
 
@@ -24,18 +24,19 @@ function PostActionBar({ post, setPost, setPosts }) {
     if (setPost) {
       toggleLike(post.id, username).then((result) => {
         setPost((prev) => ({
-        ...prev,
-        likeCount: result === "liked" ? prev.likeCount + 1 : prev.likeCount - 1,
-        likedByUser: result === "liked",
-      }));
-      })
+          ...prev,
+          likeCount:
+            result === "liked" ? prev.likeCount + 1 : prev.likeCount - 1,
+          likedByUser: result === "liked",
+        }));
+      });
     }
   };
 
   return (
     <div className="mt-4 flex justify-start gap-6 text-gray-500 text-xs">
-      <span className="px-2 py-0.5 rounded-full shadow-sm cursor-pointer">
-        💬 0
+      <span className="cursor-pointer px-2 py-0.5 rounded-full shadow-sm" onClick={onCommentClick}>
+        💬 {post.commentsCount || 0}
       </span>
 
       <span className="px-2 py-0.5 rounded-full shadow-sm cursor-pointer">

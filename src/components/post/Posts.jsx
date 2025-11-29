@@ -3,8 +3,10 @@ import { getPosts } from "../../api/axiosClient";
 import { Link } from "react-router-dom";
 import { userIcon } from "../../assets/assets";
 import PostActionBar from "./PostActionBar";
+import GetComments from "./GetComments";
+import CommentInput from "./CommentInput";
 
-const formatDateTime = (dateString) => {
+export const formatDateTime = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleString("en-IN", {
     day: "2-digit",
@@ -25,6 +27,16 @@ function Posts() {
       .catch((err) => console.error("Error fetching posts:", err))
       .finally(() => setLoading(false));
   }, []);
+
+  // Popup states
+  const [showCommentsPopup, setShowCommentsPopup] = useState(false);
+  const [popupPostId, setPopupPostId] = useState(null);
+  const [refreshComments, setRefreshComments] = useState(0);
+
+  const openCommentsPopup = (postId) => {
+    setPopupPostId(postId);
+    setShowCommentsPopup(true);
+  };
 
   if (loading)
     return <h2 className="text-center text-gray-500 mt-20">Loading...</h2>;
@@ -62,7 +74,10 @@ function Posts() {
               </span>
             </div>
 
-            <Link to={`/post/${post.id}?username=${post.user.username}`} key={post.id}>
+            <Link
+              to={`/post/${post.id}?username=${post.user.username}`}
+              key={post.id}
+            >
               <div className="text-lg font-bold text-gray-900 mb-2">
                 “{post.title}”
               </div>
@@ -85,10 +100,36 @@ function Posts() {
             </div>
 
             <div className="mt-4 flex justify-start gap-6 text-gray-500 text-xs">
-              <PostActionBar post={post} setPosts={setPosts} />
+              <PostActionBar
+                post={post}
+                setPosts={setPosts}
+                onCommentClick={() => openCommentsPopup(post.id)}
+              />
             </div>
           </div>
         ))
+      )}
+
+      {/* POPUP */}
+      {showCommentsPopup && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="bg-white w-full max-w-lg rounded-lg shadow-xl p-5 relative">
+            <button
+              className="absolute top-3 right-4 text-gray-600 hover:text-black text-xl"
+              onClick={() => setShowCommentsPopup(false)}
+            >
+              ✕
+            </button>
+
+            <h2 className="text-xl font-semibold mb-3">Comments</h2>
+
+            <GetComments id={popupPostId} />
+            <CommentInput
+              postId={popupPostId}
+              onCommentAdded={() => setPopupPostId((prev) => prev)}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

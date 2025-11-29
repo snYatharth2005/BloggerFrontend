@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://backendbyteblog-production.up.railway.app/", // backend base URL
+  baseURL: "https://backendbyteblog-production.up.railway.app/",// backend base URL
+  // baseURL: "http://localhost:8080/", 
   headers: {
     "Content-Type": "application/json",
   },
@@ -100,6 +101,25 @@ export const toggleLike = async (postId, username) => {
 
 export const likedUsers = async (id) => {
   const response = await axiosClient.get(`post/likedUser/${id}`);
+  return response.data;
+}
+
+export const postComment = async (id, commentBody) => {
+  const username = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
+  const response = await axiosClient.post(`comment/postComment/${id}?username=${username}`,
+    commentBody,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+}
+
+export const getComments = async (id) => {
+  const response = await axiosClient.get(`comment/getComments/${id}`);
   return response.data;
 }
 

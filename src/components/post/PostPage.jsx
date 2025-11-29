@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
-import { getPostById, likedUsers } from "../../api/axiosClient";
+import { getComments, getPostById, likedUsers } from "../../api/axiosClient";
 import { userIcon } from "../../assets/assets";
 import PostActionBar from "./PostActionBar";
+import GetComments from "./GetComments";
+import CommentInput from "./CommentInput";
 
 const formatDateTime = (dateString) => {
   const date = new Date(dateString);
@@ -49,7 +51,9 @@ const PostPage = () => {
       .catch((err) =>
         console.error("error while fetching user who have liked the post", err)
       );
-  }, []);
+  }, [id]);
+
+  const [refreshComments, setRefreshComments] = useState(0); //it is for comments after posting
 
   if (loading) return <p className="text-center mt-25">Loading post...</p>;
   if (!post) return <p className="text-center mt-10">Post not found.</p>;
@@ -67,7 +71,7 @@ const PostPage = () => {
 
           <div className="flex items-center mt-3 gap-4 mb-4">
             <img
-              src={post.user.profileImageUrl || user}
+              src={post.user.profileImageUrl || userIcon}
               alt={post.user.username}
               className="w-12 h-12 rounded-full border border-gray-300 object-cover"
             />
@@ -107,7 +111,6 @@ const PostPage = () => {
 
       <div className="center mt-5 mx-2">
         <div className="mb-5 border border-gray-200 h-180 overflow-y-auto no-scrollbar rounded-t-md rounded-b-lg max-w-3xl mx-auto p-6 bg-[#F0EFEF] border-b border-r border-l rounded-md shadow-sm font-poppins">
-          
           <div className="w-full p-3 bg-[#F0EFEF] flex gap-3 border-b border-gray-300">
             <button
               onClick={() => setActiveTab("comments")}
@@ -128,10 +131,13 @@ const PostPage = () => {
 
           <div className="content mt-4">
             {activeTab === "comments" && (
-              <div className="w-full bg-white rounded-md border border-gray-300 overflow-hidden">
-                <div className="h-48 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
-                  Comments
-                </div>
+              <div>
+                <CommentInput
+                  postId={id}
+                  onCommentAdded={() => setRefreshComments((prev) => prev + 1)}
+                />
+
+                <GetComments id={id} refreshTrigger={refreshComments} />
               </div>
             )}
 
@@ -144,9 +150,9 @@ const PostPage = () => {
                   >
                     <div className="flex items-center gap-4 p-3">
                       <img
-                        src={user.profileImageUrl  || userIcon}
+                        src={user.profileImageUrl || userIcon}
                         alt={user.username}
-                        className="w-8 h-10 ml-5 rounded-full border border-gray-300 object-cover"
+                        className="w-10 h-12 ml-5 rounded-full border border-gray-300 object-cover"
                       />
 
                       <div className="flex flex-col">
